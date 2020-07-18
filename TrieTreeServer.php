@@ -110,7 +110,11 @@ class TrieTreeServer {
                             }
                         }
 
-                        return false;
+                        if (!is_null(@$this->filterChars)) {//之前有同步,回滚到同部位重新查找
+                            $i = $tempI;
+                            unset($this->filterChars);
+                        }
+                        $node = $this->node;//重置树
                     } else {
                         return true;
                     }
